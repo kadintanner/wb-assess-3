@@ -16,6 +16,14 @@
       </div>
       <div>
         <input type="submit" />
+
+          {% if name %}
+          <p>Hello {{name}}!</p>
+          <a href="/top-fossils.html.njk"></a>
+          {% else %}
+          <a href="/homepage.html.njk"></a>
+          {% endif %}
+        
       </div>
     </form>
 

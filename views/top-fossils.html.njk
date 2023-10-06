@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Most Liked Fossils</title>
   </head>
+    <h1>Welcome {{ username }}</h1>
   <body>
+
     <div class="fossil-div">
       <h3>{{ fossils[0].name }}</h3>
       <h2>Liked {{ fossils[0].num_likes }} times.</h2>
       <img src="{{ fossils[0].img }}" />
+
+        <ul>
+          {% for fossils in MOST_LIKED_FOSSILS %}
+            <li>{{fossil}}</li>
+          {% endfor %}
+        </ul>
+
     </div>
   </body>
 </html>
