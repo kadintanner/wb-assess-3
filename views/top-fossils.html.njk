@@ -22,6 +22,7 @@
       <select name='selectedFossil'>
         {% for key, fossil in MOST_LIKED_FOSSILS %}
         <option value="{{ key }}">{{ fossil.name }}</option>
+        {% endfor %}
         <option id="aust">Australopithecus</option>
         <option id="quetz">Quetzal</option>
         <option id="steg">Stegosaurus</option>

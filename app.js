@@ -94,7 +94,7 @@ app.post('/like-fossil', (req,res)=>{
   if (MOST_LIKED_FOSSILS[selectedFossil]) {
     MOST_LIKED_FOSSILS[selectedFossil].num_likes++
 
-    const userName = req.session.name || 'Guest'
+    const userName = req.session.name
     res.render('thank-you.html.njk', { name: userName })
   } else {
     res.status(404).send('Not Found')
