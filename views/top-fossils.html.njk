@@ -6,25 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Most Liked Fossils</title>
   </head>
-    <h1>Welcome {{ username }}</h1>
+    <h1>Welcome {{ name }}</h1>
   <body>
 
+     {% for key, fossils in MOST_LIKED_FOSSILS %}
     <div class="fossil-div">
-      <h3>{{ fossils[0].name }}</h3>
-      <h2>Liked {{ fossils[0].num_likes }} times.</h2>
-      <img src="{{ fossils[0].img }}" />
-
-        <ul>
-          {% for fossils in MOST_LIKED_FOSSILS %}
-            <li>{{fossil}}</li>
-          {% endfor %}
-        </ul>
-
+      <h3>{{ fossils.name }}</h3>
+      <h2>Liked {{ fossils.num_likes }} times.</h2>
+      <img src="{{ fossils.img }}" />
     </div>
+          {% endfor %}
 
     <form action="/like-fossil" method="post">
-      <label for="like a fossil">Select a fossil</label>
-      <select>
+      <label for="likeFossil">Select a fossil</label>
+      <select name='selectedFossil'>
+        {% for key, fossil in MOST_LIKED_FOSSILS %}
+        <option value="{{ key }}">{{ fossil.name }}</option>
         <option id="aust">Australopithecus</option>
         <option id="quetz">Quetzal</option>
         <option id="steg">Stegosaurus</option>

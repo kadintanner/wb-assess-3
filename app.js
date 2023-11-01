@@ -4,6 +4,7 @@ import lodash from 'lodash';
 import morgan from 'morgan';
 import nunjucks from 'nunjucks';
 import ViteExpress from 'vite-express';
+import axios from 'axios';
 
 const app = express();
 const port = '8884';
@@ -61,8 +62,9 @@ const OTHER_FOSSILS = [
 ];
 
 // TODO: Replace this comment with your code
-app.get('/top-fossils', (req, res) => {
-  res.render('top-fossils.html.njk', {MOST_LIKED_FOSSILS})
+app.get('/get-name', (req, res) => {
+  let {name} = req.query
+  res.render('top-fossils.html.njk', {MOST_LIKED_FOSSILS, name})
 })
 
 app.get('/random-fossil.json', (req, res) => {
@@ -78,7 +80,7 @@ app.get('/', (req, res) => {
   res.render('homepage.html.njk')
 })
 
-app.post('/homepage.html.njk', (req, res) => {
+app.post('/', (req, res) => {
   if (req.session.name) {
     res.render('/top-fossils.html.njk')
   } else {
@@ -86,5 +88,17 @@ app.post('/homepage.html.njk', (req, res) => {
   }
 })
 
-app.get('/like-fossil',)
+app.post('/like-fossil', (req,res)=>{
+  const { selectedFossil } = req.body
+
+  if (MOST_LIKED_FOSSILS[selectedFossil]) {
+    MOST_LIKED_FOSSILS[selectedFossil].num_likes++
+
+    const userName = req.session.name || 'Guest'
+    res.render('thank-you.html.njk', { name: userName })
+  } else {
+    res.status(404).send('Not Found')
+  }
+  console.log(req.body.likeFossil)
+})
 
